@@ -1,4 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    
+    <!-- fund.period Tree View -->
+    <record model="ir.ui.view" id="fund_period_tree">
+        <field name="name">fund.period.tree</field>
+        <field name="model">fund.period</field>
+        <field name="arch" type="xml">			
+            <tree string="fund.period"  editable="bottom" sample="1">				
+                <field name="name"/>
+				<field name="date_start"/>
+				<field name="date_end"/>
+				<field name="is_closed" widget="boolean_toggle"/>				
+            </tree>
+        </field>
+    </record>
+
+    <!-- fund.category Tree View -->
+    <record model="ir.ui.view" id="fund_category_tree">
+        <field name="name">fund.category.tree</field>
+        <field name="model">fund.category</field>
+        <field name="arch" type="xml">			
+            <tree string="fund.category" editable="bottom" sample="1">				
+                <field name="name"/>								
+            </tree>
+        </field>
+    </record>
+
+    <!-- fund.transactions Tree View -->
+    <record model="ir.ui.view" id="fund_transactions_tree">
+        <field name="name">fund.transactions.tree</field>
+        <field name="model">fund.transactions</field>
+        <field name="arch" type="xml">			
+            <tree string="fund.transactions" editable="bottom" sample="1">				
+                <field name="type"/>
+                <field name="name"/>										
+				<field name="date"/>
+				<field name="amount" sum="amount"/>
+				<field name="category_id"/>	
+				<field name="note"/>	
+            </tree>
+        </field>
+    </record>
+	 
+    <!-- fund.transactions search View -->
+    <record model="ir.ui.view" id="fund_transactions_search">
+		<field name="name">fund.transactions.view.search</field>
+		<field name="model">fund.transactions</field>
+		<field name="arch" type="xml">
+			<search string="Search">				
+				<field name="type"/>
+                <field name="name"/>										
+				<field name="date"/>
+				<field name="category_id"/>               					
+				<separator/>
+				<group expand="0" string="Group By">
+					<filter string="Category" name="category" domain="[]" context="{'group_by': 'category_id'}"/>
+                    <filter string="Period" name="period" domain="[]" context="{'group_by': 'period_id'}"/>
+				</group>	
+                <searchpanel>
+					<field name="category_id" select="multi" enable_counters="1"/>
+                    <field name="period_id" select="multi" enable_counters="1"/>
+				</searchpanel>				
+			</search>
+		</field>
+	</record>
+
+    <!-- fund.transactions Form View -->
+	<record model="ir.ui.view" id="fund_transactions_form">
+		<field name="name">fund.transactions.form</field>
+		<field name="model">fund.transactions</field>
+		<field name="arch" type="xml">
+			<form string="fund.transactions">				
+				<sheet>	
+					<group>
+						<group>	                            
+                            <field name="type"/>
+                            <field name="name"/>										
+                            <field name="date"/>
+                            <field name="amount"/>                            				            																			
+						</group>
+						<group>	
+							<field name="category_id"/>	
+                            <field name="period_id"/>
+                            <field name="note"/>
+						</group>
+					</group>					
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers"/>
+					<field name="activity_ids" widget="mail_activity"/>
+					<field name="message_ids" widget="mail_thread"/>
+				</div>
+			</form>
+		</field>
+	</record>
+
+    <!-- fund.transactions PIVOT VIEW -->
+	<record model="ir.ui.view" id="fund_transactions_pivot">
+		<field name="name">fund.transactions.pivot</field>
+		<field name="model">fund.transactions</field>
+		<field name="arch" type="xml">
+			<pivot string="fund.transactions">
+				<field name="category_id" type="row"/>	
+				<field name="period_id" type="col"/>				
+				<field name="amount" type="measure"/>
+			</pivot>
+		</field>
+	</record>
+
+    <!-- fund.transactions graph VIEW -->
+	<record model="ir.ui.view" id="fund_transactions_graph">
+		<field name="name">fund.transactions.graph</field>
+		<field name="model">fund.transactions</field>
+		<field name="arch" type="xml">
+			<graph string="fund.transactions">
+				<field name="category_id" type="row"/>	
+				<field name="period_id" type="col"/>				
+				<field name="amount" type="measure"/>
+			</graph>
+		</field>
+	</record>
 </odoo>

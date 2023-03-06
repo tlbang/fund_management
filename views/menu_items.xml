@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<menuitem name="Fund Management" id="menu_fund_management" groups="fund_group_user" 
+					web_icon="fund_management,static/description/icon.png" sequence="10"/>
+
+	<!-- fund.transactions -->
+	<record id="fund_transactions_act" model="ir.actions.act_window">
+		<field name="name">Giao dịch</field>
+		<field name="res_model">fund.transactions</field>
+		<field name="view_mode">tree,form,pivot,graph</field>
+		<field name="view_id" ref="fund_transactions_tree"/>
+	</record>
+	<menuitem name="Giao dịch" id="menu_fund_transactions" parent="menu_fund_management" 
+				action="fund_transactions_act" groups="fund_group_user" sequence="1"/>
+
+
+	<!-- MasterData -->
+    <menuitem name="Master Data" id="menu_fund_masterdata" parent="menu_fund_management" groups="fund_group_administrator"
+              sequence="50"/>
+
+	<!-- fund_period -->
+	<record id="fund_period_act" model="ir.actions.act_window">
+		<field name="name">Period</field>
+		<field name="res_model">fund.period</field>
+		<field name="view_mode">tree,form</field>
+		<field name="view_id" ref="fund_period_tree"/>
+	</record>
+	<menuitem name="Period" id="menu_period" parent="menu_fund_masterdata" 
+				action="fund_period_act" groups="fund_group_administrator" sequence="1"/>
+
+	<!-- fund_category -->
+	<record id="fund_category_act" model="ir.actions.act_window">
+		<field name="name">Category</field>
+		<field name="res_model">fund.category</field>
+		<field name="view_mode">tree,form</field>
+		<field name="view_id" ref="fund_category_tree"/>
+	</record>
+	<menuitem name="Category" id="menu_category" parent="menu_fund_masterdata" 
+				action="fund_category_act" groups="fund_group_administrator" sequence="2"/>
+
+	
+	
+</odoo>

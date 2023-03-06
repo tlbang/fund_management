@@ -2,16 +2,14 @@
 
 {
     'name': 'Fund Management',
-    'category': 'Services/Project',
+    'category': 'Invoices & Payments',
     'version': '1.0',
     'depends': [
         'base',
         'utm',        
         'base_automation',        
     ],
-    'data': [        
-        'data/data.xml',
-        'data/automation.xml',
+    'data': [ 
         'security/fund_security.xml',
         'security/ir.model.access.csv',
         'views/fund.xml',
