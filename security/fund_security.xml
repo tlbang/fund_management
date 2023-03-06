@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<odoo>
+	<record id="module_category_fund" model="ir.module.category">
+		<field name="name">Fund Management</field>
+		<field name="description">Fund Management</field>
+		<field name="sequence">18</field>
+	</record>
+	<record id="fund_group_user" model="res.groups">
+		<field name="name">User</field>
+		<field name="category_id" ref="module_category_fund"/>
+	</record>
+	<record id="fund_group_officer" model="res.groups">
+		<field name="name">Officer</field>
+		<field name="category_id" ref="module_category_fund"/>
+		<field name="implied_ids" eval="[(4, ref('fund_group_user'))]"/>
+	</record>
+	<record id="fund_group_administrator" model="res.groups">
+		<field name="name">Administrator</field>
+		<field name="category_id" ref="module_category_fund"/>
+		<field name="implied_ids" eval="[(4, ref('fund_group_officer'))]"/>
+	</record>
+	
+</odoo>
